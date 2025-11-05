@@ -8,9 +8,13 @@ import { MessagingPage } from './pages/Messaging.tsx'
 import { NotFoundPage } from './pages/NotFound.tsx'
 import { SchedulePage } from './pages/Schedule.tsx'
 import { UsersPage } from './pages/Users.tsx'
+<<<<<<< HEAD
 import {PoneysPage} from './pages/Poneys.tsx';
 
 
+=======
+import { CavalierPage } from './pages/Cavalier.tsx'
+>>>>>>> eric
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -21,6 +25,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="utilisateurs" element={<UsersPage />} />
           <Route path="messagerie" element={<MessagingPage />} />
           <Route path="agenda" element={<SchedulePage />} />
+          <Route path="cavalier/:id" element={<CavalierPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="poneys" element={<PoneysPage />} />
 
