@@ -1,0 +1,133 @@
+// 🎨 Variables de couleur
+$background-page: #f9fafb;
+$green-light: #b2be8a;
+$green-dark: #5b7043;
+$text-color: #333;
+$shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+// 🐴 Page principale
+.poneys-page {
+  min-height: 100vh;
+  background-color: $background-page;
+  padding: 40px 20px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    color: $text-color;
+  }
+
+  // Grille des cartes
+  .poney-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+}
+
+// 🧱 Carte d’un poney
+.poney-card {
+  background: linear-gradient(to bottom, #cfd8b1, $green-light);
+  border-radius: 20px;
+  box-shadow: $shadow;
+  width: 250px;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  // 🖼️ Image
+  .poney-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto;
+    border: 4px solid white;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  // 🔘 Boutons
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+
+    button {
+      background-color: $green-dark;
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background-color: darken($green-dark, 10%);
+      }
+    }
+  }
+
+  // 📋 Infos principales
+  .poney-info {
+    margin-top: 10px;
+
+    h2 {
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+      color: $text-color;
+    }
+
+    p {
+      margin: 2px 0;
+      color: darken($text-color, 10%);
+    }
+  }
+
+  // Ligne
+  hr {
+    border: none;
+    border-top: 1px solid #ccc;
+    margin: 10px 0;
+  }
+
+  // 📑 Détails
+  .poney-details {
+    text-align: left;
+    font-size: 0.9rem;
+    color: $text-color;
+
+    p {
+      margin: 4px 0;
+
+      strong {
+        color: darken($text-color, 20%);
+      }
+    }
+  }
+}
+
+// 📱 Responsive
+@media (max-width: 768px) {
+  .poneys-page {
+    .poney-grid {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react'
+import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
 
 const navItems = [
@@ -6,9 +6,14 @@ const navItems = [
   { to: '/utilisateurs', label: 'Utilisateurs' },
   { to: '/messagerie', label: 'Messagerie' },
   { to: '/agenda', label: 'Agenda' },
+  {to: '/poneys', label: 'Poneys'},
 ]
 
-export function AppLayout({ children }: PropsWithChildren) {
+type AppLayoutProps = {
+  children?: ReactNode
+}
+
+export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="app-shell">
       <aside className="sidebar">

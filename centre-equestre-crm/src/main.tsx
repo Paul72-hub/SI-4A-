@@ -8,6 +8,9 @@ import { MessagingPage } from './pages/Messaging.tsx'
 import { NotFoundPage } from './pages/NotFound.tsx'
 import { SchedulePage } from './pages/Schedule.tsx'
 import { UsersPage } from './pages/Users.tsx'
+import {PoneysPage} from './pages/Poneys.tsx';
+
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -19,6 +22,8 @@ createRoot(document.getElementById('root')!).render(
           <Route path="messagerie" element={<MessagingPage />} />
           <Route path="agenda" element={<SchedulePage />} />
           <Route path="*" element={<NotFoundPage />} />
+          <Route path="poneys" element={<PoneysPage />} />
+
         </Route>
       </Routes>
     </BrowserRouter>
