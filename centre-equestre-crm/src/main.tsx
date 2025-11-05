@@ -8,13 +8,10 @@ import { MessagingPage } from './pages/Messaging.tsx'
 import { NotFoundPage } from './pages/NotFound.tsx'
 import { SchedulePage } from './pages/Schedule.tsx'
 import { UsersPage } from './pages/Users.tsx'
-<<<<<<< HEAD
 import {PoneysPage} from './pages/Poneys.tsx';
 
-
-=======
 import { CavalierPage } from './pages/Cavalier.tsx'
->>>>>>> eric
+
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
