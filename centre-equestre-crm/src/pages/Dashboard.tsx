@@ -4,12 +4,12 @@ export function DashboardPage() {
       <h2>Vue d&apos;ensemble</h2>
       <p>
         Cette zone accueillera les indicateurs principaux : planning du jour,
-        disponibilite des chevaux, messages importants et demandes en attente.
+        disponibilite des chevaux, messages importants et nombre de chevaux dispo.
       </p>
       <div className="placeholder-grid">
         <article>
           <h3>Statut du jour</h3>
-          <p>Resume des cours programmes et des ressources necessaires.</p>
+          
         </article>
         <article>
           <h3>Notifications</h3>

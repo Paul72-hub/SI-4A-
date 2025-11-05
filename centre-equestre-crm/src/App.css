@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: 260px 1fr;
   min-height: 100vh;
-  background: #f5f6fa;
-  color: #1a1a1a;
+  background: #936639;
+  color: #ede0d4;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -65,7 +65,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2rem;
-  background: #fff;
+  background: #582f0e;
+  color: #283618;
   border-bottom: 1px solid rgba(30, 30, 30, 0.1);
 }
 
@@ -107,7 +108,8 @@ section > p {
 
 .placeholder-grid article,
 .placeholder-panel {
-  background: #fff;
+  background: #ede0d4;
+  color: #283618;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 10px 30px rgba(29, 53, 87, 0.08);

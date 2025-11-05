@@ -12,7 +12,7 @@ export function AppLayout({ children }: PropsWithChildren) {
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <h1 className="brand">Les Poneys</h1>
+        <h1 className="brand">Jval</h1>
         <p className="tagline">CRM centre equestre</p>
         <nav aria-label="Navigation principale">
           <ul>
