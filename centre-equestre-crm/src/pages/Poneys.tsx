@@ -27,7 +27,7 @@ const poneysData: Poney[] = [
     taille: "90 cm",
     poids: "150 kg",
     robe: "Pie alezan",
-    image: "/images/petit-tonnerre.jpg",
+    image: "./images/petit-tonnerre.jpg",
   },
   {
     id: 2,
@@ -39,7 +39,7 @@ const poneysData: Poney[] = [
     taille: "90 cm",
     poids: "150 kg",
     robe: "Pie alezan",
-    image: "/images/petit-tonnerre.jpg",
+    image: "./images/petit-tonnerre.jpg",
   },
   {
     id: 3,
@@ -51,7 +51,7 @@ const poneysData: Poney[] = [
     taille: "90 cm",
     poids: "150 kg",
     robe: "Pie alezan",
-    image: "/images/petit-tonnerre.jpg",
+    image: "./images/petit-tonnerre.jpg",
   },
 ];
 
