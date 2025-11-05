@@ -2,8 +2,8 @@
   display: grid;
   grid-template-columns: 260px 1fr;
   min-height: 100vh;
-  background: #936639;
-  color: #ede0d4;
+  background: #f5f6fa;
+  color: #1a1a1a;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
@@ -65,7 +65,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 1.5rem 2rem;
-  background: #582f0e;
+  background: #fff;
   color: #283618;
   border-bottom: 1px solid rgba(30, 30, 30, 0.1);
 }
@@ -123,6 +123,8 @@ section > p {
 .placeholder-panel ul {
   padding-left: 1.25rem;
 }
+
+
 
 @media (max-width: 900px) {
   .app-shell {
