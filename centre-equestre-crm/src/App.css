@@ -66,6 +66,7 @@
   justify-content: space-between;
   padding: 1.5rem 2rem;
   background: #fff;
+  color: #283618;
   border-bottom: 1px solid rgba(30, 30, 30, 0.1);
 }
 
@@ -107,7 +108,8 @@ section > p {
 
 .placeholder-grid article,
 .placeholder-panel {
-  background: #fff;
+  background: #ede0d4;
+  color: #283618;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 10px 30px rgba(29, 53, 87, 0.08);
@@ -121,6 +123,8 @@ section > p {
 .placeholder-panel ul {
   padding-left: 1.25rem;
 }
+
+
 
 @media (max-width: 900px) {
   .app-shell {
