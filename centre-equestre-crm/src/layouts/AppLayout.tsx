@@ -6,6 +6,7 @@ const navItems = [
   { to: '/utilisateurs', label: 'Utilisateurs' },
   { to: '/messagerie', label: 'Messagerie' },
   { to: '/agenda', label: 'Agenda' },
+  {to: '/poneys', label: 'Poneys'},
 ]
 
 export function AppLayout({ children }: PropsWithChildren) {
