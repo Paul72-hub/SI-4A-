@@ -12,11 +12,9 @@
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-<<<<<<< HEAD
+
     "react-router-dom": "^7.9.5",
-=======
-    "react-router-dom": "^7.6.0",
->>>>>>> emmy
+
     "recharts": "^3.3.0"
   },
   "devDependencies": {
