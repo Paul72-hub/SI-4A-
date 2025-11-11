@@ -1,34 +1,70 @@
-// 🎨 Variables de couleur
+@use "sass:color";
+
+// Variables de couleur
 $background-page: #f9fafb;
 $green-light: #b2be8a;
 $green-dark: #5b7043;
 $text-color: #333;
 $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
-// 🐴 Page principale
+// Page principale
 .poneys-page {
   min-height: 100vh;
   background-color: $background-page;
-  padding: 40px 20px;
-  text-align: center;
   font-family: 'Arial', sans-serif;
+  padding: 40px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
 
   h1 {
     font-size: 2rem;
-    margin-bottom: 40px;
     color: $text-color;
+    margin-bottom: 20px;
+  }
+
+  // Conteneur global (graph + fiches)
+  .poney-layout {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 60px;
+    width: 100%;
+  }
+
+  // Camembert à gauche
+  .poney-chart {
+    position: sticky;      // reste visible au scroll
+    top: 100px;
+    flex-shrink: 0;
+    background: white;
+    border-radius: 20px;
+    box-shadow: $shadow;
+    padding: 20px 30px;
+    text-align: center;
+    height: fit-content;
+    min-width: 280px;
+
+    h3 {
+      margin-bottom: 10px;
+      color: $green-dark;
+      font-weight: bold;
+    }
   }
 
   // Grille des cartes
   .poney-grid {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 40px;
+    flex-grow: 1;
   }
 }
 
-// 🧱 Carte d’un poney
+// Carte d’un poney
 .poney-card {
   background: linear-gradient(to bottom, #cfd8b1, $green-light);
   border-radius: 20px;
@@ -43,7 +79,7 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     transform: translateY(-5px);
   }
 
-  // 🖼️ Image
+  // Image
   .poney-image {
     width: 120px;
     height: 120px;
@@ -60,7 +96,7 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
   }
 
-  // 🔘 Boutons
+  // Boutons
   .buttons {
     display: flex;
     justify-content: center;
@@ -78,12 +114,12 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       transition: background-color 0.2s;
 
       &:hover {
-        background-color: darken($green-dark, 10%);
+        background-color: color.scale($green-dark, $lightness: -10%);
       }
     }
   }
 
-  // 📋 Infos principales
+  // Infos principales
   .poney-info {
     margin-top: 10px;
 
@@ -95,7 +131,7 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
     p {
       margin: 2px 0;
-      color: darken($text-color, 10%);
+      color: color.scale($text-color, $lightness: -10%);
     }
   }
 
@@ -106,7 +142,7 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin: 10px 0;
   }
 
-  // 📑 Détails
+  // Détails
   .poney-details {
     text-align: left;
     font-size: 0.9rem;
@@ -116,18 +152,32 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       margin: 4px 0;
 
       strong {
-        color: darken($text-color, 20%);
+        color: color.scale($text-color, $lightness: -20%);
       }
     }
   }
 }
 
-// 📱 Responsive
-@media (max-width: 768px) {
+// Responsive
+@media (max-width: 900px) {
   .poneys-page {
-    .poney-grid {
+    padding: 20px;
+
+    .poney-layout {
       flex-direction: column;
       align-items: center;
+      gap: 40px;
+    }
+
+    .poney-chart {
+      position: relative; // ne reste plus fixe sur mobile
+      top: auto;
+      margin-bottom: 20px;
+      width: 100%;
+    }
+
+    .poney-grid {
+      justify-content: center;
     }
   }
 }
