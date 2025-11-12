@@ -77,6 +77,7 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
   &:hover {
     transform: translateY(-5px);
+    cursor: url('/cursorHover.cur'), pointer;
   }
 
   // Image
@@ -115,6 +116,7 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 
       &:hover {
         background-color: color.scale($green-dark, $lightness: -10%);
+        cursor: url('/cursorHover.cur'), pointer;
       }
     }
   }
