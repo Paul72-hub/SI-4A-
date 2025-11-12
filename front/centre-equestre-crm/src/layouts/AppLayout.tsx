@@ -1,12 +1,21 @@
 import type { ReactNode } from 'react'
 import { NavLink } from 'react-router-dom'
+import type { IconType } from 'react-icons'
+import { FiCalendar, FiHome, FiMessageSquare, FiUsers } from 'react-icons/fi'
+import { GiHorseHead } from 'react-icons/gi'
 
-const navItems = [
-  { to: '/', label: 'Tableau de bord' },
-  { to: '/utilisateurs', label: 'Utilisateurs' },
-  { to: '/messagerie', label: 'Messagerie' },
-  { to: '/agenda', label: 'Agenda' },
-  {to: '/poneys', label: 'Poneys'},
+type NavItem = {
+  to: string
+  label: string
+  icon: IconType
+}
+
+const navItems: NavItem[] = [
+  { to: '/', label: 'Tableau de bord', icon: FiHome },
+  { to: '/utilisateurs', label: 'Utilisateurs', icon: FiUsers },
+  { to: '/messagerie', label: 'Messagerie', icon: FiMessageSquare },
+  { to: '/agenda', label: 'Agenda', icon: FiCalendar },
+  { to: '/poneys', label: 'Poneys', icon: GiHorseHead },
 ]
 
 type AppLayoutProps = {

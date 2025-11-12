@@ -139,6 +139,36 @@ app.delete('/courses/:id', async (request, reply) => {
   }
 })
 
+app.post('/login', async (request, reply) => {
+  const { email, password } = request.body as { email: string; password: string };
+
+  try {
+    const user = await prisma.user.findFirst({
+      where: { email, password },
+    });
+
+    if (!user) {
+      return reply.code(401).send({ message: 'Identifiants invalides' });
+    }
+
+    return reply.send({
+      message: 'Connexion réussie',
+      user: {
+        id: user.id,
+        email: user.email,
+        role: user.role,
+      },
+    });
+  } catch (error) {
+    request.log.error(error);
+    return reply.code(500).send({ message: 'Erreur serveur', error });
+  }
+});
+
+
+
+
+
 const port = Number(process.env.PORT ?? 3000)
 
 app
