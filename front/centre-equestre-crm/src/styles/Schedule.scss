@@ -22,14 +22,14 @@
         border-radius: 0.25rem;
         display: inline-block;
 
-        &.disponible {
-          background: rgba(168, 218, 220, 0.9);
-        }
-        &.reserve {
+        &.planned {
           background: rgba(69, 123, 157, 0.9);
         }
-        &.maintenance {
-          background: rgba(244, 162, 97, 0.9);
+        &.confirmed {
+          background: rgba(129, 199, 132, 0.9);
+        }
+        &.cancelled {
+          background: rgba(229, 57, 53, 0.9);
         }
       }
     }
