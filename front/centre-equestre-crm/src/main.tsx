@@ -9,6 +9,7 @@ import { NotFoundPage } from './pages/NotFound.tsx'
 import { SchedulePage } from './pages/Schedule.tsx'
 import { UsersPage } from './pages/Users.tsx'
 import {PoneysPage} from './pages/Poneys.tsx';
+import { ConnexionPage } from './pages/Connexion.tsx'
 
 import { CavalierPage } from './pages/Cavalier.tsx'
 
@@ -25,7 +26,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="cavalier/:id" element={<CavalierPage />} />
           <Route path="*" element={<NotFoundPage />} />
           <Route path="poneys" element={<PoneysPage />} />
-
+          <Route path="connexion" element={<ConnexionPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

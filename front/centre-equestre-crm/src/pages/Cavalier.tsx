@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import '../styles/CavalierPage.scss';
+import '../styles/Cavalier.scss';
 import { CavalierCoursComponent } from "./CavalierCoursComponent";
 import { CavalierCaracComponent } from "./CavalierCaracComponent";
 

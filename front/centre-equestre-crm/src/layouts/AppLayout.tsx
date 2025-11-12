@@ -6,7 +6,7 @@ const navItems = [
   { to: '/utilisateurs', label: 'Utilisateurs' },
   { to: '/messagerie', label: 'Messagerie' },
   { to: '/agenda', label: 'Agenda' },
-  {to: '/poneys', label: 'Poneys'},
+  { to: '/poneys', label: 'Poneys' },
 ]
 
 type AppLayoutProps = {
@@ -40,7 +40,9 @@ export function AppLayout({ children }: AppLayoutProps) {
       <div className="content-area">
         <header className="topbar">
           <span className="welcome">Bonjour Paul !</span>
-          <span className="status-badge">Version alpha</span>
+          <NavLink to="/connexion" className="login-button">
+            Se connecter
+          </NavLink>
         </header>
         <main>{children}</main>
       </div>
