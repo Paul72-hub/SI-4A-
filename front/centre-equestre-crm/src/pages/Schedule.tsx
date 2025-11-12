@@ -219,17 +219,18 @@ export function SchedulePage() {
       {error && <div className="schedule-error">Erreur : {error}</div>}
 
       <div className="calendar-legend">
+        <strong>Statut des cours :</strong>
         <span className="legend-item">
-          <span className="legend-color disponible" />
-          Disponible
+          <span className="legend-color planned" />
+          Planifié
         </span>
         <span className="legend-item">
-          <span className="legend-color reserve" />
-          Reserve
+          <span className="legend-color confirmed" />
+          Confirmé
         </span>
         <span className="legend-item">
-          <span className="legend-color maintenance" />
-          Maintenance
+          <span className="legend-color cancelled" />
+          Annulé
         </span>
       </div>
 

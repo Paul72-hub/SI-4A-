@@ -42,7 +42,9 @@
   font-weight: 600;
   padding: 0.5rem 0.75rem;
   border-radius: 0.5rem;
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
   transition: background 0.2s ease, color 0.2s ease;
 }
 
@@ -53,6 +55,10 @@
 .nav-link.active {
   background: #457b9d;
   color: #f1faee;
+}
+
+.nav-icon {
+  font-size: 1.2rem;
 }
 
 .content-area {
@@ -173,16 +179,16 @@ section > p {
   display: inline-block;
 }
 
-.legend-color.disponible {
-  background: rgba(168, 218, 220, 0.9);
-}
-
-.legend-color.reserve {
+.legend-color.planned {
   background: rgba(69, 123, 157, 0.9);
 }
 
-.legend-color.maintenance {
-  background: rgba(244, 162, 97, 0.9);
+.legend-color.confirmed {
+  background: rgba(129, 199, 132, 0.9);
+}
+
+.legend-color.cancelled {
+  background: rgba(229, 57, 53, 0.9);
 }
 
 .calendar-wrapper {
