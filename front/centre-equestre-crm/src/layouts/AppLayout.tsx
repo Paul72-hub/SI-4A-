@@ -6,7 +6,7 @@ const navItems = [
   { to: '/utilisateurs', label: 'Utilisateurs' },
   { to: '/messagerie', label: 'Messagerie' },
   { to: '/agenda', label: 'Agenda' },
-  { to: '/poneys', label: 'Poneys' },
+  {to: '/poneys', label: 'Poneys'},
 ]
 
 type AppLayoutProps = {
@@ -21,19 +21,23 @@ export function AppLayout({ children }: AppLayoutProps) {
         <p className="tagline">CRM centre equestre</p>
         <nav aria-label="Navigation principale">
           <ul>
-            {navItems.map((item) => (
-              <li key={item.to}>
-                <NavLink
-                  to={item.to}
-                  className={({ isActive }) =>
-                    isActive ? 'nav-link active' : 'nav-link'
-                  }
-                  end={item.to === '/'}
-                >
-                  {item.label}
-                </NavLink>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              const Icon = item.icon
+              return (
+                <li key={item.to}>
+                  <NavLink
+                    to={item.to}
+                    className={({ isActive }) =>
+                      isActive ? 'nav-link active' : 'nav-link'
+                    }
+                    end={item.to === '/'}
+                  >
+                    <Icon className="nav-icon" aria-hidden="true" />
+                    <span>{item.label}</span>
+                  </NavLink>
+                </li>
+              )
+            })}
           </ul>
         </nav>
       </aside>
