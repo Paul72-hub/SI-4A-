@@ -251,3 +251,47 @@ section > p {
     min-width: 840px;
   }
 }
+
+html, body {
+  cursor: url('/cursorNormal.cur'), auto;
+}
+
+
+
+
+/* clickable elements: use hover cursor on hover */
+button:hover,
+a:hover,
+.nav-link:hover,
+[role="button"]:hover,
+input[type="submit"]:hover,
+label:hover {
+  cursor: url('/cursorHover.cur'), pointer;
+}
+
+/* active (mouse down) state: use click cursor */
+button:active,
+a:active,
+.nav-link:active,
+[role="button"]:active,
+input[type="submit"]:active,
+label:active {
+  cursor: url('/cursorClick.cur'), pointer;
+}
+
+/* text inputs should still show text (I-beam) */
+input[type="text"],
+textarea,
+input[type="email"],
+input[type="search"],
+input[type="password"] {
+  cursor: text;
+}
+
+/* optional: ensure pointer for interactive list items */
+.chat-list li,
+.placeholder-grid article,
+.placeholder-panel,
+.calendar-cell.slot {
+  cursor: pointer;
+}
