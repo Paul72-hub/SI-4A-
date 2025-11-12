@@ -58,6 +58,7 @@
     padding: 0.75rem;
     min-height: 72px;
     background: #fff;
+    text-align: left;
 
     &.header-corner {
       background: #f1f5f9;
@@ -86,15 +87,157 @@
 
     &.slot {
       position: relative;
-      background: rgba(168, 218, 220, 0.12);
+      background: #f2f4f8;
       transition: background 0.2s ease, box-shadow 0.2s ease;
 
       &:hover {
-        background: rgba(168, 218, 220, 0.32);
+        background: #e2e6ef;
         box-shadow: inset 0 0 0 2px rgba(69, 123, 157, 0.35);
       }
     }
   }
+
+  .slot-trigger {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    cursor: pointer;
+  }
+
+  .course-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+
+    &.status-planned {
+      background: rgba(69, 123, 157, 0.15);
+      color: #1d3557;
+    }
+
+    &.status-confirmed {
+      background: rgba(129, 199, 132, 0.2);
+      color: #1b5e20;
+    }
+
+    &.status-cancelled {
+      background: rgba(229, 57, 53, 0.18);
+      color: #b71c1c;
+    }
+  }
+}
+
+.schedule-feedback,
+.schedule-loading,
+.schedule-error {
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+}
+
+.schedule-feedback {
+  background: rgba(69, 123, 157, 0.12);
+  color: #1d3557;
+}
+
+.schedule-loading {
+  background: rgba(168, 218, 220, 0.3);
+  color: #1d3557;
+}
+
+.schedule-error {
+  background: rgba(229, 57, 53, 0.12);
+  color: #b71c1c;
+}
+
+.course-form-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 20;
+}
+
+.course-form {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 2rem;
+  width: min(420px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    font-weight: 600;
+    color: #1d3557;
+
+    input,
+    textarea,
+    select {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      border: 1px solid rgba(29, 53, 87, 0.2);
+      font: inherit;
+    }
+  }
+
+  .course-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .btn-primary {
+    background: #1d3557;
+    color: #fff;
+
+    &:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-secondary {
+    background: rgba(29, 53, 87, 0.1);
+    color: #1d3557;
+  }
+
+  .btn-danger {
+    background: rgba(229, 57, 53, 0.15);
+    color: #b71c1c;
+  }
+}
+
+.schedule-instructions {
+  margin-top: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  background: rgba(29, 53, 87, 0.08);
+  color: #1d3557;
+  font-weight: 600;
 }
 
 .calendar-cell.today {
