@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "recharts": "^3.4.1"
+  },
+  "devDependencies": {
+    "sass-embedded": "^1.93.3"
+  }
+}
