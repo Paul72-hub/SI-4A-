@@ -26,7 +26,10 @@ export function AppLayout({ children }: AppLayoutProps) {
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <h1 className="brand">Jval</h1>
+        <div className="brand">
+          <img src="../images/jval.png" alt="Logo JVAL" className="logo" />
+          <span>JVAL</span>
+        </div>
         <p className="tagline">CRM centre equestre</p>
         <nav aria-label="Navigation principale">
           <ul>
