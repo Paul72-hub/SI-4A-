@@ -1,30 +1,10 @@
-import { useState } from "react";
 import { useParams } from "react-router-dom";
-import '../styles/cavalierPage.scss';
+import '../styles/CavalierPage.scss';
+import { CavalierCoursComponent } from "./CavalierCoursComponent";
+import { CavalierCaracComponent } from "./CavalierCaracComponent";
 
 export function CavalierPage() {
   const { id } = useParams<{ id: string }>();
-
-  // États pour les badges
-  const [coursTags, setCoursTags] = useState<string[]>([]);
-  const [coursInput, setCoursInput] = useState("");
-
-  const [caracTags, setCaracTags] = useState<string[]>([]);
-  const [caracInput, setCaracInput] = useState("");
-
-  // Fonction générique pour ajouter un tag à l'appui sur Entrée
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLInputElement>,
-    inputValue: string,
-    setTags: React.Dispatch<React.SetStateAction<string[]>>,
-    setInput: React.Dispatch<React.SetStateAction<string>>
-  ) => {
-    if (e.key === "Enter" && inputValue.trim() !== "") {
-      setTags((prev) => [...prev, inputValue.trim()]);
-      setInput("");
-      e.preventDefault();
-    }
-  };
 
   return (
     <div className="cavalier-container">
@@ -43,49 +23,8 @@ export function CavalierPage() {
           <span className="info-label">Membre depuis:</span> 2020
         </div>
 
-        {/* Zone Cours */}
-        <div className="info-item interactive-container">
-          <span className="info-label">Cours:</span>
-          <div className="interactive-box">
-            <div className="ellipse-container">
-              {coursTags.map((tag, idx) => (
-                <div key={idx} className="ellipse">{tag}</div>
-              ))}
-            </div>
-            <input
-              type="text"
-              className="input-field"
-              placeholder="Ajouter un cours..."
-              value={coursInput}
-              onChange={(e) => setCoursInput(e.target.value)}
-              onKeyDown={(e) =>
-                handleKeyDown(e, coursInput, setCoursTags, setCoursInput)
-              }
-            />
-          </div>
-        </div>
-
-        {/* Zone Caractéristiques */}
-        <div className="info-item interactive-container">
-          <span className="info-label">Caractéristiques:</span>
-          <div className="interactive-box">
-            <div className="ellipse-container">
-              {caracTags.map((tag, idx) => (
-                <div key={idx} className="ellipse">{tag}</div>
-              ))}
-            </div>
-            <input
-              type="text"
-              className="input-field"
-              placeholder="Ajouter une caractéristique..."
-              value={caracInput}
-              onChange={(e) => setCaracInput(e.target.value)}
-              onKeyDown={(e) =>
-                handleKeyDown(e, caracInput, setCaracTags, setCaracInput)
-              }
-            />
-          </div>
-        </div>
+        <CavalierCoursComponent />
+        <CavalierCaracComponent />
       </div>
     </div>
   );
