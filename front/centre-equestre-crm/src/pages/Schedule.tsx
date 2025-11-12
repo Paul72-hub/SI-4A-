@@ -348,19 +348,92 @@ export function SchedulePage() {
 }
 
 export function TodaySchedule() {
+  const [courses, setCourses] = useState<CourseResponse[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
   const todayIndex = (new Date().getDay() + 6) % 7
-  const today = weekDays[todayIndex]
+  const todayName = weekDays[todayIndex]
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setLoading(true)
+        const data = await getCourses()
+        const today = new Date()
+        const todayStart = new Date(today)
+        todayStart.setHours(0, 0, 0, 0)
+        const todayEnd = new Date(todayStart)
+        todayEnd.setHours(23, 59, 59, 999)
+
+        // Filtrer uniquement les cours d’aujourd’hui
+        const todayCourses = data.filter((course) => {
+          const start = new Date(course.start)
+          return start >= todayStart && start <= todayEnd
+        })
+
+        // Trier par heure de début
+        todayCourses.sort(
+          (a, b) => new Date(a.start).getTime() - new Date(b.start).getTime(),
+        )
+
+        setCourses(todayCourses)
+      } catch (err) {
+        setError(
+          err instanceof Error
+            ? err.message
+            : 'Erreur lors du chargement des cours du jour',
+        )
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchCourses()
+  }, [])
+
+  if (loading) return <div className="today-schedule">Chargement...</div>
+  if (error)
+    return <div className="today-schedule">Erreur : {error}</div>
 
   return (
     <div className="today-schedule">
-      <h3>{today}</h3>
-      <div className="today-column">
-        {hours.map((hour) => (
-          <div key={hour} className="hour-slot disponible">
-            <span className="hour-label">{hour}</span>
-          </div>
-        ))}
-      </div>
+      <h3>{todayName}</h3>
+
+      {courses.length === 0 ? (
+        <p>Aucun cours prévu aujourd’hui.</p>
+      ) : (
+        <ul className="today-course-list">
+          {courses.map((course) => {
+            const start = new Date(course.start)
+            const end = new Date(course.end)
+            const time = `${start.getHours().toString().padStart(2, '0')}:${start
+              .getMinutes()
+              .toString()
+              .padStart(2, '0')} - ${end
+              .getHours()
+              .toString()
+              .padStart(2, '0')}:${end
+              .getMinutes()
+              .toString()
+              .padStart(2, '0')}`
+
+            return (
+              <li
+                key={course.id}
+                className={`today-course-item status-${course.status.toLowerCase()}`}
+              >
+                <div className="course-time">{time}</div>
+                <div className="course-info">
+                  <strong>{course.title}</strong>
+                  
+                </div>
+              </li>
+            )
+          })}
+        </ul>
+      )}
     </div>
   )
 }
+
