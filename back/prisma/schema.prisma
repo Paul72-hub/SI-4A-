@@ -1,0 +1,92 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Horse {
+  id         Int         @id @default(autoincrement()) @map("cheval_id")
+  name       String      @map("nom") @db.VarChar(80)
+  sex        HorseSex    @map("sexe")
+  breed      String?     @map("race") @db.VarChar(80)
+  sireNumber String?     @unique @map("numero_sire") @db.VarChar(20)
+  birthDate  DateTime?   @map("date_naissance") @db.Date
+  heightCm   Int?        @map("taille_cm") @db.SmallInt
+  weightKg   Int?        @map("poids_kg") @db.SmallInt
+  coat       String?     @map("robe") @db.VarChar(80)
+  imageUrl   String?     @map("image_url")
+  status     HorseStatus @default(AVAILABLE) @map("statut")
+  notes      String?     @map("commentaires")
+  createdAt  DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
+  sessions   Course[]    @relation("HorseSessions")
+
+  @@map("cheval")
+}
+
+model User {
+  id                 Int      @id @default(autoincrement()) @map("user_id")
+  firstName          String   @map("prenom") @db.VarChar(60)
+  lastName           String   @map("nom") @db.VarChar(60)
+  email              String   @unique @db.VarChar(120)
+  passwordHash       String   @map("mot_de_passe_hash")
+  phone              String?  @map("telephone") @db.VarChar(30)
+  role               UserRole @map("role")
+  createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
+  riderSessions      Course[] @relation("RiderSessions")
+  instructorSessions Course[] @relation("InstructorSessions")
+
+  @@map("app_user")
+}
+
+model Course {
+  id           Int          @id @default(autoincrement()) @map("cours_id")
+  title        String       @map("titre") @db.VarChar(120)
+  description  String?      @map("description")
+  start        DateTime     @map("debut") @db.Timestamptz(6)
+  end          DateTime     @map("fin") @db.Timestamptz(6)
+  horseId      Int?         @map("cheval_id")
+  riderId      Int?         @map("cavalier_id")
+  instructorId Int?         @map("moniteur_id")
+  status       CourseStatus @default(PLANNED) @map("statut")
+  createdAt    DateTime     @default(now()) @map("created_at") @db.Timestamptz(6)
+  rider        User?        @relation("RiderSessions", fields: [riderId], references: [id], onUpdate: NoAction)
+  horse        Horse?       @relation("HorseSessions", fields: [horseId], references: [id], onUpdate: NoAction)
+  instructor   User?        @relation("InstructorSessions", fields: [instructorId], references: [id], onUpdate: NoAction)
+
+  @@map("cours")
+}
+
+enum HorseStatus {
+  AVAILABLE
+  REST
+  MAINTENANCE
+
+  @@map("cheval_status")
+}
+
+enum HorseSex {
+  HONGRE
+  JUMENT
+  ETALON
+
+  @@map("cheval_sexe")
+}
+
+enum UserRole {
+  CAVALIER
+  MONITEUR
+  DIRECTEUR
+
+  @@map("user_role")
+}
+
+enum CourseStatus {
+  PLANNED
+  CONFIRMED
+  CANCELLED
+
+  @@map("cours_status")
+}
