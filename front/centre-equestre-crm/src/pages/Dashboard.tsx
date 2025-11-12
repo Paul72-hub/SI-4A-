@@ -1,4 +1,7 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from "recharts"
+import { TodaySchedule } from "./Schedule"
+import { HomeMessages } from "./HomeMessages";
+
 
 
 export function DashboardPage() {
@@ -22,12 +25,12 @@ export function DashboardPage() {
       </p>
       <div className="placeholder-grid">
         <article>
-          <h3>Statut du jour</h3>
-          
+          <h3>Planning du jour</h3>
+          <TodaySchedule />
         </article>
         <article>
-          <h3>Notifications</h3>
-          <p>Alertes de sante, messages urgents et taches a suivre.</p>
+          <h3>Messages récents</h3>
+          <HomeMessages />
         </article>
         <article>
           <h3>Suivi de l&apos;activite</h3>

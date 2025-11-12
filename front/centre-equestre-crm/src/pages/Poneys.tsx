@@ -6,7 +6,7 @@ import {
   Tooltip,
   Legend
 } from "recharts";
-import "./Poneys.scss";
+import "../styles/Poneys.scss";
 
 // ----- Type de données -----
 type Poney = {
@@ -25,12 +25,12 @@ type Poney = {
 
 // ----- Données exemple -----
 const poneysData: Poney[] = [
-  { id: 1, nom: "Petit Tonnerre", age: "5 ans", sexe: "Jument", race: "Shetland", numeroSire: "123456789", taille: "90 cm", poids: "150 kg", robe: "Pie alezan", image: "/images/petit-tonnerre.jpg", occupe: true },
-  { id: 2, nom: "Éclair", age: "8 ans", sexe: "Hongre", race: "Connemara", numeroSire: "987654321", taille: "120 cm", poids: "250 kg", robe: "Gris pommelé", image: "/images/eclair.jpg", occupe: false },
-  { id: 3, nom: "Foudre", age: "6 ans", sexe: "Jument", race: "Welsh", numeroSire: "456789123", taille: "100 cm", poids: "180 kg", robe: "Alezan brûlé", image: "/images/foudre.jpg", occupe: true },
-  { id: 4, nom: "Biscotte", age: "7 ans", sexe: "Jument", race: "PFS", numeroSire: "654987321", taille: "110 cm", poids: "200 kg", robe: "Bai clair", image: "/images/biscotte.jpg", occupe: false },
-  { id: 5, nom: "Mistral", age: "9 ans", sexe: "Hongre", race: "Dartmoor", numeroSire: "852369741", taille: "105 cm", poids: "220 kg", robe: "Noir pangaré", image: "/images/mistral.jpg", occupe: true },
-  { id: 6, nom: "Caramel", age: "4 ans", sexe: "Jument", race: "Shetland", numeroSire: "159753486", taille: "95 cm", poids: "160 kg", robe: "Alezan clair", image: "/images/caramel.jpg", occupe: false },
+  { id: 1, nom: "Petit Tonnerre", age: "5 ans", sexe: "Jument", race: "Shetland", numeroSire: "123456789", taille: "90 cm", poids: "150 kg", robe: "Pie alezan", image: "./images/petit-tonnerre.jpg", occupe: true },
+  { id: 2, nom: "Éclair", age: "8 ans", sexe: "Hongre", race: "Connemara", numeroSire: "987654321", taille: "120 cm", poids: "250 kg", robe: "Gris pommelé", image: "./images/eclair.jpg", occupe: false },
+  { id: 3, nom: "Foudre", age: "6 ans", sexe: "Jument", race: "Welsh", numeroSire: "456789123", taille: "100 cm", poids: "180 kg", robe: "Alezan brûlé", image: "./images/foudre.jpg", occupe: true },
+  { id: 4, nom: "Biscotte", age: "7 ans", sexe: "Jument", race: "PFS", numeroSire: "654987321", taille: "110 cm", poids: "200 kg", robe: "Bai clair", image: "./images/biscotte.jpg", occupe: false },
+  { id: 5, nom: "Mistral", age: "9 ans", sexe: "Hongre", race: "Dartmoor", numeroSire: "852369741", taille: "105 cm", poids: "220 kg", robe: "Noir pangaré", image: "./images/mistral.jpg", occupe: true },
+  { id: 6, nom: "Caramel", age: "4 ans", sexe: "Jument", race: "Shetland", numeroSire: "159753486", taille: "95 cm", poids: "160 kg", robe: "Alezan clair", image: "./images/caramel.jpg", occupe: false },
 ];
 
 // ----- Calcul dynamique pour le camembert -----

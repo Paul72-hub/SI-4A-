@@ -1,3 +1,6 @@
+import React from "react"
+import "../styles/Schedule.scss"
+
 const weekDays = [
   'Lundi',
   'Mardi',
@@ -66,5 +69,23 @@ export function SchedulePage() {
         </div>
       </div>
     </section>
+  )
+}
+
+export function TodaySchedule() {
+  const todayIndex = (new Date().getDay() + 6) % 7
+  const today = weekDays[todayIndex]
+
+  return (
+    <div className="today-schedule">
+      <h3>{today}</h3>
+      <div className="today-column">
+        {hours.map((hour) => (
+          <div key={hour} className="hour-slot disponible">
+            <span className="hour-label">{hour}</span>
+          </div>
+        ))}
+      </div>
+    </div>
   )
 }
