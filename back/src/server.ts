@@ -1,6 +1,6 @@
 import Fastify from 'fastify'
 import cors from '@fastify/cors'
-import { CourseStatus, Prisma, PrismaClient } from '@prisma/client'
+import { ConversationType, CourseStatus, Prisma, PrismaClient } from '@prisma/client'
 import { z } from 'zod'
 
 const app = Fastify({ logger: true })
@@ -139,6 +139,84 @@ app.delete('/courses/:id', async (request, reply) => {
   }
 })
 
+const conversationSchema = z.object({
+  subject: z.string().min(1, 'Le sujet est obligatoire'),
+  kind: z.nativeEnum(ConversationType).optional(),
+  courseId: z.number().int().positive().optional(),
+  createdById: z.number().int().positive().optional(),
+})
+
+app.get('/conversations', async (request, reply) => {
+  const querySchema = z.object({
+    courseId: z.coerce.number().int().positive().optional(),
+    kind: z.nativeEnum(ConversationType).optional(),
+  })
+
+  const filters = querySchema.safeParse(request.query)
+  if (!filters.success) {
+    return reply.code(400).send({ message: 'Filtres invalides', issues: filters.error.flatten() })
+  }
+
+  const { courseId, kind } = filters.data
+
+  const conversations = await prisma.conversation.findMany({
+    where: {
+      courseId,
+      kind,
+    },
+    include: {
+      createdBy: true,
+      course: {
+        select: {
+          id: true,
+          title: true,
+        },
+      },
+      _count: {
+        select: { messages: true },
+      },
+    },
+    orderBy: { createdAt: 'desc' },
+  })
+
+  return conversations
+})
+
+app.post('/conversations', async (request, reply) => {
+  try {
+    const payload = conversationSchema.parse(request.body)
+
+    const created = await prisma.conversation.create({
+      data: {
+        subject: payload.subject,
+        kind: payload.kind ?? 'GENERAL',
+        courseId: payload.courseId ?? null,
+        createdById: payload.createdById ?? null,
+      },
+      include: {
+        createdBy: true,
+        course: {
+          select: {
+            id: true,
+            title: true,
+          },
+        },
+      },
+    })
+
+    return reply.code(201).send(created)
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return reply.code(400).send({ message: 'Payload invalide', issues: error.flatten() })
+    }
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
+      return reply.code(400).send({ message: 'Identifiant de cours ou d’utilisateur invalide' })
+    }
+    request.log.error(error)
+    return reply.code(500).send({ message: 'Erreur lors de la création de la conversation' })
+  }
+})
+
 const port = Number(process.env.PORT ?? 3000)
 
 app
@@ -150,3 +228,74 @@ app
     app.log.error(error)
     process.exit(1)
   })
+const messageSchema = z.object({
+  authorId: z.number().int().positive().optional(),
+  content: z.string().min(1, 'Le contenu est obligatoire'),
+  attachmentUrl: z.string().url().optional(),
+})
+
+app.get('/conversations/:id/messages', async (request, reply) => {
+  const paramsSchema = z.object({ id: z.coerce.number().int().positive() })
+
+  try {
+    const { id } = paramsSchema.parse(request.params)
+    const messages = await prisma.message.findMany({
+      where: { conversationId: id },
+      include: {
+        author: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
+      orderBy: { createdAt: 'asc' },
+    })
+
+    return messages
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return reply.code(400).send({ message: 'Identifiant invalide', issues: error.flatten() })
+    }
+    return reply.code(500).send({ message: 'Erreur lors de la récupération des messages' })
+  }
+})
+
+app.post('/conversations/:id/messages', async (request, reply) => {
+  const paramsSchema = z.object({ id: z.coerce.number().int().positive() })
+
+  try {
+    const { id } = paramsSchema.parse(request.params)
+    const payload = messageSchema.parse(request.body)
+
+    const created = await prisma.message.create({
+      data: {
+        conversationId: id,
+        authorId: payload.authorId ?? null,
+        content: payload.content,
+        attachmentUrl: payload.attachmentUrl,
+      },
+      include: {
+        author: {
+          select: {
+            id: true,
+            firstName: true,
+            lastName: true,
+          },
+        },
+      },
+    })
+
+    return reply.code(201).send(created)
+  } catch (error) {
+    if (error instanceof z.ZodError) {
+      return reply.code(400).send({ message: 'Payload invalide', issues: error.flatten() })
+    }
+    if (error instanceof Prisma.PrismaClientKnownRequestError && error.code === 'P2003') {
+      return reply.code(400).send({ message: 'Conversation ou auteur inexistant' })
+    }
+    request.log.error(error)
+    return reply.code(500).send({ message: 'Erreur lors de l’envoi du message' })
+  }
+})

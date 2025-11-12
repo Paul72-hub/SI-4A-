@@ -23,7 +23,7 @@ model Horse {
   createdAt  DateTime    @default(now()) @map("created_at") @db.Timestamptz(6)
   sessions   Course[]    @relation("HorseSessions")
 
-  @@map("cheval")
+  @@map("cheval") 
 }
 
 model User {
@@ -35,8 +35,10 @@ model User {
   phone              String?  @map("telephone") @db.VarChar(30)
   role               UserRole @map("role")
   createdAt          DateTime @default(now()) @map("created_at") @db.Timestamptz(6)
-  riderSessions      Course[] @relation("RiderSessions")
-  instructorSessions Course[] @relation("InstructorSessions")
+  riderSessions      Course[]        @relation("RiderSessions")
+  instructorSessions Course[]        @relation("InstructorSessions")
+  createdConversations Conversation[] @relation("ConversationCreatedBy")
+  messages           Message[]       @relation("MessageAuthor")
 
   @@map("app_user")
 }
@@ -55,8 +57,45 @@ model Course {
   rider        User?        @relation("RiderSessions", fields: [riderId], references: [id], onUpdate: NoAction)
   horse        Horse?       @relation("HorseSessions", fields: [horseId], references: [id], onUpdate: NoAction)
   instructor   User?        @relation("InstructorSessions", fields: [instructorId], references: [id], onUpdate: NoAction)
+  conversations Conversation[] @relation("CourseConversations")
 
   @@map("cours")
+}
+model Conversation {
+  id           Int           @id @default(autoincrement()) @map("conversation_id")
+  subject      String        @map("sujet") @db.VarChar(160)
+  kind         ConversationType @default(GENERAL) @map("type")
+  courseId     Int?          @map("cours_id")
+  createdById  Int?          @map("created_by")
+  createdAt    DateTime      @default(now()) @map("created_at") @db.Timestamptz(6)
+
+  course     Course? @relation("CourseConversations", fields: [courseId], references: [id])
+  createdBy  User?   @relation("ConversationCreatedBy", fields: [createdById], references: [id])
+  messages Message[]
+
+  @@map("conversation")
+}
+
+model Message {
+  id             Int       @id @default(autoincrement()) @map("message_id")
+  conversationId Int       @map("conversation_id")
+  authorId       Int?      @map("auteur_id")
+  content        String    @map("contenu")
+  attachmentUrl  String?   @map("piece_jointe_url")
+  createdAt      DateTime  @default(now()) @map("created_at") @db.Timestamptz(6)
+  updatedAt      DateTime? @map("updated_at") @db.Timestamptz(6)
+
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  author       User?        @relation("MessageAuthor", fields: [authorId], references: [id])
+
+  @@map("message")
+}
+
+enum ConversationType {
+  GENERAL
+  COURS
+  ALERT
+@@map("conversation_type")
 }
 
 enum HorseStatus {
