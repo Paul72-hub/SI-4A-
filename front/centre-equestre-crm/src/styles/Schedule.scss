@@ -110,12 +110,18 @@
   .course-tag {
     display: inline-flex;
     align-items: center;
+    gap: 0.25rem;
     padding: 0.25rem 0.5rem;
     border-radius: 0.5rem;
     font-size: 0.8rem;
     font-weight: 600;
     border: none;
     cursor: pointer;
+
+    small {
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
 
     &.status-planned {
       background: rgba(69, 123, 157, 0.15);
@@ -199,6 +205,7 @@
     display: flex;
     justify-content: flex-end;
     gap: 0.75rem;
+    flex-wrap: wrap;
   }
 
   .btn-primary,
@@ -244,4 +251,65 @@
 .calendar-cell.today {
   background: rgba(69, 123, 157, 0.1);
   font-weight: 600;
+}
+
+.schedule-warning {
+  margin: -0.25rem 0 0;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  background: rgba(229, 152, 26, 0.15);
+  color: #8c4b07;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.today-schedule {
+  margin-top: 2rem;
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(29, 53, 87, 0.06);
+
+  &.empty {
+    text-align: center;
+    color: #475569;
+    font-weight: 600;
+  }
+
+  h3 {
+    margin-bottom: 1rem;
+    color: #0b2545;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+
+      &:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      span {
+        font-size: 0.85rem;
+        color: #475569;
+      }
+
+      .today-schedule-meta {
+        display: flex;
+        gap: 1rem;
+        font-size: 0.85rem;
+        color: #475569;
+      }
+    }
+  }
 }

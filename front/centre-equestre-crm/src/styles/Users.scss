@@ -1,0 +1,161 @@
+@use "sass:color";
+
+.users-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  .users-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+
+    h2 {
+      margin: 0;
+    }
+
+    p {
+      margin: 0.35rem 0 0;
+      color: #4b5563;
+    }
+
+    .btn-primary.subtle {
+      border: none;
+      border-radius: 0.75rem;
+      padding: 0.6rem 1.2rem;
+      background: #1d3557;
+      color: #fff;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+
+  .users-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+
+    div {
+      background: #fff;
+      border-radius: 0.75rem;
+      padding: 0.85rem 1rem;
+      box-shadow: 0 6px 18px rgba(29, 53, 87, 0.08);
+
+      span {
+        color: #6b7280;
+        font-size: 0.85rem;
+      }
+
+      strong {
+        display: block;
+        font-size: 1.5rem;
+        color: #1d3557;
+      }
+    }
+  }
+
+  .users-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background: #fff;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 18px rgba(29, 53, 87, 0.08);
+
+    .role-filters {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+
+      button {
+        border: 1px solid rgba(29, 53, 87, 0.2);
+        border-radius: 999px;
+        padding: 0.4rem 0.9rem;
+        background: transparent;
+        cursor: pointer;
+        font-weight: 600;
+
+        &.active {
+          background: #1d3557;
+          color: #fff;
+        }
+      }
+    }
+
+    input[type="search"] {
+      flex: 1;
+      min-width: 220px;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(29, 53, 87, 0.2);
+      padding: 0.5rem 0.75rem;
+      font: inherit;
+    }
+  }
+
+  .users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+
+    .user-card {
+      background: #fff;
+      border-radius: 1rem;
+      padding: 1rem;
+      box-shadow: 0 12px 30px rgba(29, 53, 87, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.5rem;
+
+        h3 {
+          margin: 0;
+        }
+
+        p {
+          margin: 0;
+          color: #4b5563;
+        }
+
+        .role-pill {
+          align-self: flex-start;
+          color: #fff;
+          padding: 0.25rem 0.65rem;
+          border-radius: 999px;
+          font-weight: 600;
+        }
+      }
+
+      .user-phone {
+        margin: 0;
+        color: #374151;
+      }
+
+      .user-actions {
+        margin-top: auto;
+        display: flex;
+        gap: 0.5rem;
+
+        .btn-secondary {
+          border: 1px solid rgba(29, 53, 87, 0.2);
+          border-radius: 0.6rem;
+          padding: 0.35rem 0.75rem;
+          background: transparent;
+          cursor: pointer;
+        }
+
+        .btn-link {
+          background: none;
+          border: none;
+          color: #1d3557;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}

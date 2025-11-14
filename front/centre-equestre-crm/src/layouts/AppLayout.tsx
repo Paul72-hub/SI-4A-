@@ -1,8 +1,9 @@
 import type { ReactNode } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import type { IconType } from 'react-icons'
 import { FiCalendar, FiHome, FiMessageSquare, FiUsers } from 'react-icons/fi'
 import { GiHorseHead } from 'react-icons/gi'
+import { useAuth } from '../context/AuthContext'
 
 type NavItem = {
   to: string
@@ -16,6 +17,7 @@ const navItems: NavItem[] = [
   { to: '/messagerie', label: 'Messagerie', icon: FiMessageSquare },
   { to: '/agenda', label: 'Agenda', icon: FiCalendar },
   { to: '/poneys', label: 'Poneys', icon: GiHorseHead },
+  //{ to: '/cavalier', label: 'Cavalier', icon: }
 ]
 
 type AppLayoutProps = {
@@ -23,6 +25,15 @@ type AppLayoutProps = {
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
+  const { user, logout } = useAuth()
+  const navigate = useNavigate()
+  const displayName = user ? [user.firstName, user.lastName].filter(Boolean).join(' ').trim() : ''
+
+  const handleLogout = async () => {
+    await logout()
+    navigate('/connexion')
+  }
+
   return (
     <div className="app-shell">
       <aside className="sidebar">
@@ -55,10 +66,16 @@ export function AppLayout({ children }: AppLayoutProps) {
       </aside>
       <div className="content-area">
         <header className="topbar">
-          <span className="welcome">Bonjour Paul !</span>
-          <NavLink to="/connexion" className="login-button">
-            Se connecter
-          </NavLink>
+          <span className="welcome">{user ? `Bonjour ${displayName}` : 'Bonjour !'}</span>
+          {user ? (
+            <button type="button" className="login-button logout" onClick={handleLogout}>
+              Se déconnecter
+            </button>
+          ) : (
+            <NavLink to="/connexion" className="login-button">
+              Se connecter
+            </NavLink>
+          )}
         </header>
         <main>{children}</main>
       </div>
