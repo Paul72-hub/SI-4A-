@@ -39,6 +39,7 @@ model User {
   instructorSessions Course[]        @relation("InstructorSessions")
   createdConversations Conversation[] @relation("ConversationCreatedBy")
   messages           Message[]       @relation("MessageAuthor")
+  conversationParticipations ConversationParticipant[]
 
   @@map("app_user")
 }
@@ -72,6 +73,7 @@ model Conversation {
   course     Course? @relation("CourseConversations", fields: [courseId], references: [id])
   createdBy  User?   @relation("ConversationCreatedBy", fields: [createdById], references: [id])
   messages Message[]
+  participants ConversationParticipant[]
 
   @@map("conversation")
 }
@@ -89,6 +91,19 @@ model Message {
   author       User?        @relation("MessageAuthor", fields: [authorId], references: [id])
 
   @@map("message")
+}
+
+model ConversationParticipant {
+  id             Int      @id @default(autoincrement()) @map("participant_id")
+  conversationId Int      @map("conversation_id")
+  userId         Int      @map("user_id")
+  addedAt        DateTime @default(now()) @map("added_at") @db.Timestamptz(6)
+
+  conversation Conversation @relation(fields: [conversationId], references: [id])
+  user         User         @relation(fields: [userId], references: [id])
+
+  @@unique([conversationId, userId], map: "conversation_participant_unique")
+  @@map("conversation_participant")
 }
 
 enum ConversationType {

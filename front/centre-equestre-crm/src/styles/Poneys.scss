@@ -25,6 +25,14 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
   }
 
+  .error-banner {
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    background: rgba(229, 57, 53, 0.15);
+    color: #b71c1c;
+    font-weight: 600;
+  }
+
   // Conteneur global (graph + fiches)
   .poney-layout {
     display: flex;
@@ -61,6 +69,74 @@ $shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     justify-content: flex-start;
     gap: 40px;
     flex-grow: 1;
+  }
+
+  .horse-form {
+    width: 100%;
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    box-shadow: $shadow;
+    margin-bottom: 2rem;
+    text-align: left;
+
+    h3 {
+      margin-top: 0;
+      color: $green-dark;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        font-weight: 600;
+        color: $text-color;
+
+        input,
+        select,
+        textarea {
+          padding: 0.5rem 0.75rem;
+          border-radius: 0.5rem;
+          border: 1px solid rgba(0, 0, 0, 0.15);
+          font: inherit;
+        }
+      }
+
+      .notes-field {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .form-actions {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: flex-end;
+      gap: 0.75rem;
+
+      .btn-primary,
+      .btn-secondary {
+        border: none;
+        border-radius: 0.75rem;
+        padding: 0.6rem 1.2rem;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .btn-primary {
+        background: $green-dark;
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: rgba(0, 0, 0, 0.08);
+        color: $text-color;
+      }
+    }
   }
 }
 

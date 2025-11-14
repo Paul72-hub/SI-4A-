@@ -1,3 +1,4 @@
+
 .app-shell {
   display: grid;
   grid-template-columns: 260px 1fr;
@@ -108,28 +109,140 @@ section > p {
   color: #3f3f3f;
 }
 
-.placeholder-grid {
+.dashboard-overview {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.dashboard-hero p {
+  margin: 0;
+  max-width: 680px;
+  color: #4a4a4a;
+}
+
+.dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
   gap: 1.5rem;
 }
 
-.placeholder-grid article,
-.placeholder-panel {
-  background: #8cbd80;
-  color: #283618;
-  border-radius: 1rem;
+.dashboard-card {
+  background: #fff;
+  border-radius: 1.25rem;
   padding: 1.5rem;
-  box-shadow: 0 50px 500px rgba(29, 53, 87, 0.08);
+  box-shadow: 0 25px 60px rgba(15, 23, 42, 0.08);
+  border: 1px solid rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.placeholder-panel h3,
-.placeholder-grid h3 {
-  margin-top: 0;
+.dashboard-card h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #1d3557;
 }
 
-.placeholder-panel ul {
-  padding-left: 1.25rem;
+.dashboard-card p {
+  margin: 0;
+  color: #475569;
+}
+
+.dashboard-card.dashboard-chart {
+  align-items: center;
+  justify-content: center;
+}
+
+.dashboard-card .recharts-wrapper {
+  margin-inline: auto;
+}
+
+.dashboard-card .today-schedule {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.dashboard-card .today-schedule ul {
+  gap: 0.85rem;
+}
+
+.dashboard-card .today-schedule li {
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f8fafc;
+  box-shadow: none;
+}
+
+.dashboard-card .today-schedule-meta {
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.home-messages {
+  width: 100%;
+}
+
+.home-messages ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.home-messages li {
+  padding: 0.85rem 1rem;
+  border-radius: 0.8rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #f8fafc;
+  box-shadow: 0 15px 35px rgba(15, 23, 42, 0.07);
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 0.3rem 0.75rem;
+  align-items: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.home-messages li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 45px rgba(15, 23, 42, 0.12);
+}
+
+.home-messages li.unread {
+  border-color: #8b5e3c;
+  background: rgba(245, 237, 227, 0.7);
+}
+
+.home-messages .chat-name {
+  font-weight: 600;
+  color: #1d3557;
+}
+
+.home-messages .last-message {
+  grid-column: 1 / -1;
+  color: #475569;
+  font-size: 0.9rem;
+}
+
+.home-messages .timestamp {
+  font-size: 0.8rem;
+  color: #94a3b8;
+  justify-self: end;
+}
+
+.home-messages .badge {
+  justify-self: end;
+  background: #8b5e3c;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.1rem 0.55rem;
+  font-size: 0.75rem;
 }
 
 
@@ -268,6 +381,24 @@ section > p {
   }
 }
 
+.topbar .login-button.logout {
+  background: rgba(25, 118, 210, 0.15);
+  color: #1976d2;
+  border: 1px solid #1976d2;
+  cursor: pointer;
+}
+
+.schedule-error .btn-primary {
+  border: none;
+  border-radius: 0.75rem;
+  padding: 0.6rem 1.2rem;
+  margin-left: 0.5rem;
+  background: #1d3557;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .calendar-grid {
     grid-template-columns: 80px repeat(7, minmax(120px, 1fr));
@@ -313,8 +444,7 @@ input[type="password"] {
 
 /* optional: ensure pointer for interactive list items */
 .chat-list li,
-.placeholder-grid article,
-.placeholder-panel,
+.dashboard-card,
 .calendar-cell.slot {
   cursor: pointer;
 }

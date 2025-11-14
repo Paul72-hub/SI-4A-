@@ -1,33 +1,49 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 import '../styles/Connexion.scss'
 
 export function ConnexionPage() {
   const navigate = useNavigate()
+  const { login } = useAuth()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+  const [loading, setLoading] = useState(false)
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    setError('')
+    setLoading(true)
 
     try {
-      const response = await fetch('http://localhost:3000/login', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL ?? 'http://localhost:3000'}/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
       })
 
-      if (response.ok) {
-        const user = await response.json()
-        localStorage.setItem('user', JSON.stringify(user)) // garde l’utilisateur en mémoire
-        navigate('/') // redirige vers la page principale
-      } else {
+      if (!response.ok) {
         setError('Identifiants incorrects')
+        setLoading(false)
+        return
       }
+
+      const data = await response.json()
+      login({
+        id: data.user.id,
+        email: data.user.email,
+        role: data.user.role,
+        firstName: data.user.firstName,
+        lastName: data.user.lastName,
+      })
+
+      navigate('/')
     } catch (err) {
-      console.error(err)
       setError('Erreur de connexion')
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -37,22 +53,26 @@ export function ConnexionPage() {
         <h2>Connexion</h2>
 
         <input
-          type="text"
-          placeholder="Identifiant"
+          type="email"
+          placeholder="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(event) => setEmail(event.target.value)}
+          required
         />
 
         <input
           type="password"
           placeholder="Mot de passe"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(event) => setPassword(event.target.value)}
+          required
         />
 
         {error && <p className="error">{error}</p>}
 
-        <button type="submit">Se connecter</button>
+        <button type="submit" disabled={loading}>
+          {loading ? 'Connexion...' : 'Se connecter'}
+        </button>
       </form>
     </div>
   )
