@@ -38,7 +38,7 @@ export function AppLayout({ children }: AppLayoutProps) {
     <div className="app-shell">
       <aside className="sidebar">
         <div className="brand">
-          <img src="../images/jval.png" alt="Logo JVAL" className="logo" />
+          <img src="/images/jval.png" alt="Logo JVAL" className="logo" />
           <span>JVAL</span>
         </div>
         <p className="tagline">CRM centre equestre</p>
