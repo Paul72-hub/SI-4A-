@@ -34,7 +34,7 @@ export function DashboardPage() {
           <h3>Suivi de l&apos;activité</h3>
           <PieChart width={250} height={220}>
             <Pie data={availability} cx="50%" cy="50%" labelLine={false} outerRadius={80} fill="#8884d8" dataKey="value">
-              {availability.map((entry, index) => (
+              {availability.map((_, index) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>

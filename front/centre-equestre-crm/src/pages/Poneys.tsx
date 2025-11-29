@@ -219,7 +219,7 @@ export function PoneysPage() {
           ) : (
             <PieChart width={250} height={250}>
               <Pie data={stats} cx="50%" cy="50%" labelLine={false} outerRadius={80} dataKey="value" label>
-                {stats.map((entry, index) => (
+                {stats.map((_, index) => (
                   <Cell key={`cell-${index}`} fill={index === 0 ? "#7B8D42" : "#8B5E3C"} />
                 ))}
               </Pie>
