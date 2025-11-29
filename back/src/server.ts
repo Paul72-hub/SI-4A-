@@ -266,7 +266,8 @@ app.put('/courses/:id', async (request, reply) => {
       id,
     )
 
-    const updateData: Prisma.CourseUpdateInput = {}
+    // Use unchecked so we can set scalar FK ids directly
+    const updateData: Prisma.CourseUncheckedUpdateInput = {}
 
     if (payload.title !== undefined) updateData.title = payload.title
     if (payload.description !== undefined) updateData.description = payload.description ?? null
